@@ -1,7 +1,7 @@
-const apiKey = 'YOUR_NEWS_API_KEY'; // Get from newsapi.org
+const apiKey = '71680848ee1740f8b842212d153fc24f';
 
 async function getNews() {
-  const query = document.getElementById('search').value;
+  const query = document.getElementById('search').value || 'latest';
   const url = `https://newsapi.org/v2/everything?q=${query}&apiKey=${apiKey}`;
   const res = await fetch(url);
   const data = await res.json();
@@ -12,8 +12,8 @@ async function getNews() {
     div.className = 'article';
     div.innerHTML = `
       <h3>${article.title}</h3>
-      <p>${article.description}</p>
-      <button onclick="summarize('${article.description}')">Summarize</button>
+      <p>${article.description || "No description available."}</p>
+      <button onclick="summarize('${article.description || ''}')">Summarize</button>
     `;
     container.appendChild(div);
   });
